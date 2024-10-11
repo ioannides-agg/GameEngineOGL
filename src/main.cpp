@@ -30,7 +30,7 @@ int main() {
     Engine.linkUpdate(&camera);
 
     //configure the materials
-    material mat{"../Assets/images/funimage1.jpg"};
+    material mat{"../Assets/images/container.jpg"};
     glUniform1i(glGetUniformLocation(shader.getShaderLoc(), "tex"), 0);
     glUniform1i(glGetUniformLocation(shader.getShaderLoc(), "tex2"), 1);
 
