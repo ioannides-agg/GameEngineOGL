@@ -4,7 +4,7 @@
 //TODO: implement Input Manager
 class InputManager {
     public:
-    static bool GetKeyPress(int Key);
+    static bool GetKeyPress(int Key) { return glfwGetKey(glfwGetCurrentContext(), Key) == GLFW_PRESS;}
 };
 
 struct Keys {

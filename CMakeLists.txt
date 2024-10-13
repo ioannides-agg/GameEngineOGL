@@ -9,9 +9,7 @@ add_library(aggelEngineLibs STATIC
     src/includes/stb_image/stb_image.cpp
     src/Shaders/shader.cpp
     src/Engine/EngineCore.cpp
-    src/Engine/EngineObject.cpp
     src/Engine/Renderer.cpp
-    src/Engine/InputManager.cpp
     src/Engine/EngineScripts/Skybox.cpp
     src/Engine/EngineScripts/camera.cpp
     src/Meshes/Mesh.cpp

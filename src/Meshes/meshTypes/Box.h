@@ -1,4 +1,5 @@
 #include "../Mesh.h"
+#include "../../config.h"
 
 class Box : public Mesh
 {
