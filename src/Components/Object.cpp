@@ -1,6 +1,6 @@
 #include "Object.h"
 
-Object::Object(Mesh* _model, material* _mat, unsigned int shader) {
+Object::Object(std::shared_ptr<Mesh> _model, std::shared_ptr<material> _mat, unsigned int shader) {
     model = _model;
     mat = _mat;
     internal_shader = shader;
@@ -22,11 +22,11 @@ void Object::render() {
     model->draw();
 }
 
-void Object::attachScript(EngineBehaviour* s) {
+void Object::attachScript(std::shared_ptr<EngineBehaviour> s) {
     scripts.push_back(s);
     s->object_addr = (std::uintptr_t)this;
 }
 
-std::vector<EngineBehaviour*> Object::getAttachedScripts() {
+std::vector<std::shared_ptr<EngineBehaviour>> Object::getAttachedScripts() {
     return scripts;
 }

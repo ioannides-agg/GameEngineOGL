@@ -1,3 +1,4 @@
+#pragma once
 #include "../EngineObject.h"
 
 class Camera : public EngineBehaviour {

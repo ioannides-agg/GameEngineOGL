@@ -1,4 +1,5 @@
 #pragma once
+#include "../config.h"
 #include "../Meshes/meshConfig.h"
 #include "../Engine/EngineObject.h"
 #include "Transform.h"
@@ -6,15 +7,15 @@
 class Object {
     public:
     Transform transform;
-    Object(Mesh* _model, material* _mat, unsigned int internal_shader);
+    Object(std::shared_ptr<Mesh> _model, std::shared_ptr<material> _mat, unsigned int internal_shader);
     void render();
-    void attachScript(EngineBehaviour* s);
-    std::vector<EngineBehaviour*> getAttachedScripts();
+    void attachScript(std::shared_ptr<EngineBehaviour> s);
+    std::vector<std::shared_ptr<EngineBehaviour>> getAttachedScripts();
 
     private:
-    std::vector<EngineBehaviour*> scripts;
+    std::vector<std::shared_ptr<EngineBehaviour>> scripts;
     glm::mat4 local;
     unsigned int internal_shader;
-    Mesh* model;
-    material* mat;
+    std::shared_ptr<Mesh> model;
+    std::shared_ptr<material> mat;
 };

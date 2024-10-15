@@ -1,12 +1,15 @@
 #pragma once
-#include "EngineScripts/EngineScriptsConfig.h"
+#include "../config.h"
+#include "EngineObject.h"
+
+namespace core {
 
 class EngineCore {
     public:
     EngineCore();
     ~EngineCore();
     void callUpdateFunctions();
-    void linkUpdate(EngineBehaviour* obj);
+    void linkUpdate(std::shared_ptr<EngineBehaviour> obj);
     int getCoreStatus();
     GLFWwindow* mainWindow;
     void setShader(unsigned int);
@@ -17,7 +20,8 @@ class EngineCore {
     int coreStatus;
     int initializeCore();
     void coreUpdate();
-    std::vector<EngineBehaviour*> modules;
+    std::vector<std::shared_ptr<EngineBehaviour>> modules;
 };
 
 void onWindowResizeCallback(GLFWwindow* win, int width, int height);
+}

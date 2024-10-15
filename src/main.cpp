@@ -1,12 +1,11 @@
 #include "config.h"
-#include "Engine/EngineCore.h"
 #include "Shaders/shader.h"
-#include "Engine/Renderer.h"
-#include "Engine/InputManager.h"
+#include "EngineLibrary.h"
 #include "Engine/Scripts/Scripts.h"
+#include "Engine/EngineScripts/EngineScriptsConfig.h"
 
 //load the Engine Core and additional core functionalities of engine
-EngineCore Engine;
+core::EngineCore Engine;
 
 void ProcessInput();
 
@@ -23,26 +22,27 @@ int main() {
     Renderer renderer;
 
     //link the update functions of the Engine Scripts
-    Skybox sb{0.2f, 0.4f, 0.8f, 1.0f};
-    Camera camera{shader.getShaderLoc(), glm::vec3(0.0f, 0.0f, -3.0f), glm::vec3(0.0f, 0.0f, 0.0f), 90.0f};
+    std::shared_ptr<Skybox> sb (new Skybox(0.2f, 0.4f, 0.8f, 1.0f));
+    std::shared_ptr<Camera> camera (new Camera(shader.getShaderLoc(), 
+                                    glm::vec3(0.0f, 0.0f, -3.0f), 
+                                    glm::vec3(0.0f, 0.0f, 0.0f), 90.0f));
 
-    Engine.linkUpdate(&sb);
-    Engine.linkUpdate(&camera);
+    Engine.linkUpdate(sb);
+    Engine.linkUpdate(camera);
 
     //configure the materials
-    material mat{"../Assets/images/container.jpg"};
+    std::shared_ptr<material> mat (new material("../Assets/images/container.jpg"));
     glUniform1i(glGetUniformLocation(shader.getShaderLoc(), "tex"), 0);
     glUniform1i(glGetUniformLocation(shader.getShaderLoc(), "tex2"), 1);
 
     //configure Meshes
-    Box box;
-    //box.setPos(0.0f, 0.0f, 0.0f);
-    //box.setShader(shader.getShaderLoc());
+    std::shared_ptr<Mesh> box (new Box);
 
-    Object boxObj{&box, &mat, shader.getShaderLoc()};
-    boxObj.attachScript(new TestScript());
+    Object boxObj{box, mat, shader.getShaderLoc()};
+    std::shared_ptr<TestScript> ts (new TestScript());
+    boxObj.attachScript(ts);
 
-    for(EngineBehaviour* script : boxObj.getAttachedScripts()) {
+    for(std::shared_ptr<EngineBehaviour> script : boxObj.getAttachedScripts()) {
         Engine.linkUpdate(script);
     }
 

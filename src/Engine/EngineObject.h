@@ -4,7 +4,7 @@
 class EngineBehaviour {
     public:
     std::uintptr_t object_addr;
-    EngineBehaviour();
-    virtual void update();
-    ~EngineBehaviour();
+    EngineBehaviour() {}
+    virtual void update() {}
+    ~EngineBehaviour() {}
 };

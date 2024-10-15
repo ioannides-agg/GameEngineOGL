@@ -1,5 +1,7 @@
 #include "EngineCore.h"
 
+namespace core {
+
 //intiliazes the core in the constructor
 EngineCore::EngineCore() {
     coreStatus = initializeCore();
@@ -28,7 +30,7 @@ void EngineCore::callUpdateFunctions() {
 
 //linking function to add additional objects update 
 //functions in the main loop for ease of additional components
-void EngineCore::linkUpdate(EngineBehaviour* obj) {
+void EngineCore::linkUpdate(std::shared_ptr<EngineBehaviour> obj) {
     modules.push_back(obj);
 }
 
@@ -101,4 +103,6 @@ unsigned int EngineCore::getShader() {
 //CALLBACK FUNCTIONS UNRELATED TO CLASS
 void onWindowResizeCallback(GLFWwindow* win, int width, int height) {
     glViewport(0, 0, width, height);
+}
+
 }
